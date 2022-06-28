@@ -46,22 +46,44 @@ function createSquares() {
 
 createSquares();
 
-function addStyle() {
-    this.classList.add('trail');
+function generateRandomColor() {
+    let randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+    return randomColor
 }
 
-function addMouseOverEvent() {
-    let square = document.querySelectorAll('.square');
-    square.forEach((square) => {
-        square.addEventListener('mouseover', addStyle);
+function mouseOverNormalMode() {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+        square.addEventListener('mouseenter', () => {
+            square.style.backgroundColor = generateRandomColor();
+            
+        });
     })
 }
 
-addMouseOverEvent()
+function mouseOverNormalMode() {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+        square.addEventListener('mouseenter', (e) => {
+            square.style.backgroundColor = 'black';
+            console.log(square)
+        });
+    })
+}
+
+mouseOverNormalMode()
+
+function mouseOverRainbowMode() {
+    let squares = document.querySelectorAll('.square');
+    squares.forEach((square) => {
+        square.addEventListener('mouseenter', () => {
+            square.style.backgroundColor = generateRandomColor();
+            
+        });
+    })
+}
 
 // part 2:
-
-let btn = document.querySelector('button');
 
 function getSquarePerSide() {
     while (true) {
@@ -85,7 +107,15 @@ function removeSquaresAndRows() {
     });
 }
 
-btn.addEventListener('click', () => {
+let btnChanger = document.querySelector('#changer');
+
+let btnRainbowMode = document.querySelector('#rainbowMode');
+
+let btnNormalMode = document.querySelector('#normalMode');
+
+let btnReset = document.querySelector('#reset');
+
+btnChanger.addEventListener('click', () => {
 
     removeSquaresAndRows();
 
@@ -95,6 +125,23 @@ btn.addEventListener('click', () => {
 
     createSquares();
 
-    addMouseOverEvent()
-    
+    mouseOverNormalMode()
+});
+
+btnRainbowMode.addEventListener('click', () => {
+    mouseOverRainbowMode()
+});
+
+btnNormalMode.addEventListener('click', () => {
+    mouseOverNormalMode()
+});
+
+btnReset.addEventListener('click', (e) => {
+    removeSquaresAndRows();
+
+    createRows();
+
+    createSquares();
+
+    mouseOverNormalMode()
 });
